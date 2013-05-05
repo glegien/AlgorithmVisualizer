@@ -5,5 +5,6 @@ namespace IOManager
     [InheritedExport]
     public interface IIoManager
     {
+        void StopAlgorithm();
     }
 }

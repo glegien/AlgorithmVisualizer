@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Algorithm
 {
@@ -12,6 +14,7 @@ namespace Algorithm
 
         #region Private Member Variables
 
+        private readonly IList<ICalculationResultListener> _calculationResultListenerCollection;
         private readonly bool _shouldContinue;
 
         #endregion
@@ -20,6 +23,8 @@ namespace Algorithm
 
         public Algorithm()
         {
+            _calculationResultListenerCollection = new List<ICalculationResultListener>();
+            CalculationResults = new List<ICalculationResult>();
             _shouldContinue = true;
         }
 
@@ -34,6 +39,16 @@ namespace Algorithm
                 Thread.Sleep(SleepTime);
             }
         }
+
+        public void RegisterCalculationResultListener(ICalculationResultListener calculationResultListener)
+        {
+            if (calculationResultListener == null)
+                throw new ArgumentNullException("calculationResultListener");
+
+            _calculationResultListenerCollection.Add(calculationResultListener);
+        }
+
+        public IEnumerable<ICalculationResult> CalculationResults { get; private set; }
 
         #endregion
     }

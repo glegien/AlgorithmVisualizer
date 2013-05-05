@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="IAlgorithm.cs" />
+    <Compile Include="ICalculationResult.cs" />
+    <Compile Include="ICalculationResultListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

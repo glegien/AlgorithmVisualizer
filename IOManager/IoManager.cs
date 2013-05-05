@@ -20,5 +20,14 @@ namespace IOManager
         }
 
         #endregion
+
+        #region IIoManager Implementation
+
+        public void StopAlgorithm()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
     }
 }

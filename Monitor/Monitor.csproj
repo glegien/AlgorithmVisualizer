@@ -50,6 +50,10 @@
       <Project>{09A5A0A0-6D29-4A2E-B87E-F8D66BAB34A6}</Project>
       <Name>Algorithm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IOManager\IOManager.csproj">
+      <Project>{C61ACF44-260B-4C9B-AB1F-BFBF865DB323}</Project>
+      <Name>IOManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

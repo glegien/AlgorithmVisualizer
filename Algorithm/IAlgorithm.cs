@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Collections.Generic;
 
 namespace Algorithm
 {
@@ -13,5 +15,17 @@ namespace Algorithm
         /// Feel free to remove / change when necessary
         /// </summary>
         void Run();
+
+        /// <summary>
+        /// Registeres a ICalculationResultListener that will be notified each time new result is calculated
+        /// </summary>
+        /// <exception cref="ArgumentNullException">When calculationResultListener is null</exception>
+        /// <param name="calculationResultListener">CalculationResultListener to register</param>
+        void RegisterCalculationResultListener(ICalculationResultListener calculationResultListener);
+
+        /// <summary>
+        /// Collection of all calculation results
+        /// </summary>
+        IEnumerable<ICalculationResult> CalculationResults { get; }
     }
 }
