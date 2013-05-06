@@ -14,8 +14,9 @@ namespace Algorithm
 
         #region Private Member Variables
 
-        private readonly IList<ICalculationResultListener> _calculationResultListenerCollection;
-        private readonly bool _shouldContinue;
+        private IList<ICalculationResultListener> _calculationResultListenerCollection;
+        private volatile bool _paused;
+        private volatile int _numberOfIterations;
 
         #endregion
 
@@ -23,21 +24,40 @@ namespace Algorithm
 
         public Algorithm()
         {
-            _calculationResultListenerCollection = new List<ICalculationResultListener>();
-            CalculationResults = new List<ICalculationResult>();
-            _shouldContinue = true;
+            _calculationResultListenerCollection = new List<ICalculationResultListener>();  
         }
 
         #endregion
 
         #region IAlgorithm Implementation
 
-        public void Run()
+        public void Start(string inputData)
+        {         
+            CalculationResults = new List<ICalculationResult>();
+            _paused = false;
+            _numberOfIterations = 30;
+
+            Compute();
+        }
+
+        public void Continue()
         {
-            while (_shouldContinue)
+            if (_paused)
             {
-                Thread.Sleep(SleepTime);
+                _paused = false;
+                Compute();
             }
+            else throw new Exception("Cannot continue stoped or finished algorithm!");
+        }
+
+        public void Pause()
+        {
+            _paused = true;
+        }
+
+        public void Stop()
+        {
+            _numberOfIterations = 0;
         }
 
         public void RegisterCalculationResultListener(ICalculationResultListener calculationResultListener)
@@ -49,6 +69,30 @@ namespace Algorithm
         }
 
         public IEnumerable<ICalculationResult> CalculationResults { get; private set; }
+
+        #endregion
+
+        #region Algorithm computations
+
+        /// <summary>
+        /// Time-consuming operations
+        /// </summary>
+        private void Compute()
+        {
+            new Thread(() =>
+            {
+                lock (this)
+                {
+                    while (!_paused && _numberOfIterations > 0)
+                    {
+                        Thread.Sleep(SleepTime);
+                        Console.WriteLine("N: " + _numberOfIterations);
+                        (CalculationResults as List<ICalculationResult>).Add(new SimpleCalculationResult());
+                        _numberOfIterations--;
+                    }
+                }
+            }).Start();
+        }
 
         #endregion
     }

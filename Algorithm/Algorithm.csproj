@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
+    <Compile Include="SimpleCalculationResult.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ICalculationResult.cs" />
     <Compile Include="ICalculationResultListener.cs" />

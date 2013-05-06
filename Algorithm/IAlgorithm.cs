@@ -11,10 +11,25 @@ namespace Algorithm
     public interface IAlgorithm
     {
         /// <summary>
-        /// Example method for setting up projects purposes
-        /// Feel free to remove / change when necessary
+        /// Starts algorithm 
         /// </summary>
-        void Run();
+        /// <param name="inputData">Input data for algorithm</param>
+        void Start(string inputData);
+
+        /// <summary>
+        /// Ends algorithm
+        /// </summary>
+        void Stop();
+
+        /// <summary>
+        /// Pause algotithm in its current state
+        /// </summary>
+        void Pause();
+
+        /// <summary>
+        /// Resumes algorithm operations from paused state 
+        /// </summary>
+        void Continue();
 
         /// <summary>
         /// Registeres a ICalculationResultListener that will be notified each time new result is calculated
