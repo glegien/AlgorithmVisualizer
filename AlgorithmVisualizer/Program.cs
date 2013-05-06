@@ -21,17 +21,8 @@ namespace AlgorithmVisualizer
             var charts = container.GetExportedValue<ICharts>();
             var ioManager = container.GetExportedValue<IIoManager>();
             var monitor = container.GetExportedValue<IMonitor>();
-
-            algorithm.Start("10");
-            System.Threading.Thread.Sleep(400);
-            algorithm.Pause();
-            System.Console.WriteLine((algorithm.CalculationResults as System.Collections.IList).Count);
-            System.Console.WriteLine();
-
-            algorithm.Continue();
-            System.Threading.Thread.Sleep(5400);
-            System.Console.WriteLine((algorithm.CalculationResults as System.Collections.IList).Count);
-            System.Console.ReadKey();
+           
+            ioManager.StartAlgorithm("AAAA");
         }
     }
 }

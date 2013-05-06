@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.IO;
 
 namespace Algorithm
 {
@@ -89,6 +90,15 @@ namespace Algorithm
                         Console.WriteLine("N: " + _numberOfIterations);
                         (CalculationResults as List<ICalculationResult>).Add(new SimpleCalculationResult());
                         _numberOfIterations--;
+                    }
+                    if (_numberOfIterations == 0)
+                    {
+                        using (var stream = File.Create(Path.Combine(Directory.GetCurrentDirectory(), "AAA.bata")))
+                        {
+                            stream.WriteByte(8);
+                            stream.Flush();
+                            stream.Close();
+                        }
                     }
                 }
             }).Start();
